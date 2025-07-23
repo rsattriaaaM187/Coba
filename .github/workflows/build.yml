@@ -20,7 +20,6 @@ jobs:
           sudo apt update
           sudo apt install -y python3-pip zip unzip openjdk-17-jdk build-essential libffi-dev libssl-dev
           pip install buildozer
-          buildozer init
 
       - name: Copy buildozer.spec
         run: cp buildozer.spec buildozer.spec
@@ -29,7 +28,8 @@ jobs:
         run: buildozer android debug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: PrediksiSahamAI.apk
           path: bin/*.apk
+          if-no-files-found: warn
